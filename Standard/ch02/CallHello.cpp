@@ -4,5 +4,5 @@
 #include <cstdlib> // Declare "system()"
 
 int main() {
-   system("Hello.exe");
+    system("Hello.exe");
 } ///:~

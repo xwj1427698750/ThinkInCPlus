@@ -4,13 +4,14 @@
 #include <string>
 #include <iostream>
 #include <fstream>
+
 using namespace std;
 
 int main() {
-   ifstream in("../Standard/ch02/FillString.cpp");
-   string s, line;
+    ifstream in("../Standard/ch02/FillString.cpp");
+    string s, line;
 
-   while (getline(in, line))
-       s += line + "\n";
-   cout << s;
+    while (getline(in, line))
+        s += line + "\n";
+    cout << s;
 } ///:~

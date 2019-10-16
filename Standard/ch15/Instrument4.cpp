@@ -2,17 +2,22 @@
 // Extensibility in OOP
 // Created by XPL on 2019/10/10.
 #include <iostream>
+
 using namespace std;
-enum note { middleC, Csharp, Cflag }; // Etc.
+enum note {
+    middleC, Csharp, Cflag
+}; // Etc.
 
 class Instrument {
 public:
     virtual void play(note) const {
         cout << "Instrument::play" << endl;
     }
-    virtual char* what() const {
+
+    virtual char *what() const {
         return "Instrument";
     }
+
     // Assume this will modify the object:
     virtual void adjust(int) {
     }
@@ -23,9 +28,11 @@ public:
     void play(note) const {
         cout << "Wind::play" << endl;
     }
-    char* what() const {
+
+    char *what() const {
         return "Wind";
     }
+
     void adjust(int) {
     }
 };
@@ -35,9 +42,11 @@ public:
     void play(note) const {
         cout << "Percussion::play" << endl;
     }
-    char* what() const {
+
+    char *what() const {
         return "Percussion";
     }
+
     void adjust(int) {
     }
 };
@@ -47,9 +56,11 @@ public:
     void play(note) const {
         cout << "Stringed::play" << endl;
     }
-    char* what() const {
+
+    char *what() const {
         return "Stringed";
     }
+
     void adjust(int) {
     }
 };
@@ -59,7 +70,8 @@ public:
     void play(note) const {
         cout << "Brass::play" << endl;
     }
-    char* what() const {
+
+    char *what() const {
         return "Brass";
     }
 };
@@ -69,24 +81,25 @@ public:
     void play(note) const {
         cout << "Woodwind::play" << endl;
     }
-    char* what() const {
+
+    char *what() const {
         return "Woodwind";
     }
 };
 
 // Identical function from before:
-void tune(Instrument& i) {
+void tune(Instrument &i) {
     // ...
     i.play(middleC);
 }
 
 // New function:
-void f(Instrument& i) {
+void f(Instrument &i) {
     i.adjust(1);
 }
 
 // Upcasting during array initialization
-Instrument* A[] = {
+Instrument *A[] = {
         new Wind,
         new Percussion,
         new Stringed,
@@ -94,16 +107,16 @@ Instrument* A[] = {
 };
 
 int main() {
-   Wind flute;
-   Percussion drum;
-   Stringed violin;
-   Brass flugelhorn;
-   Woodwind recorder;
-   
-   tune(flute);
-   tune(drum);
-   tune(violin);
-   tune(flugelhorn);
-   tune(recorder);
-   f(flugelhorn);
+    Wind flute;
+    Percussion drum;
+    Stringed violin;
+    Brass flugelhorn;
+    Woodwind recorder;
+
+    tune(flute);
+    tune(drum);
+    tune(violin);
+    tune(flugelhorn);
+    tune(recorder);
+    f(flugelhorn);
 } ///:~

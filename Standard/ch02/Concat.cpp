@@ -2,6 +2,7 @@
 // Character array Concatenation
 // Created by XPL on 2019/10/9.
 #include <iostream>
+
 using namespace std;
 
 int main() {

@@ -2,8 +2,11 @@
 // Inheritance & upcasting
 // Created by XPL on 2019/10/10.
 #include <iostream>
+
 using namespace std;
-enum note { middleC, Csharp, Eflat }; // Etc.
+enum note {
+    middleC, Csharp, Eflat
+}; // Etc.
 
 class Instrument {
 public:
@@ -22,13 +25,13 @@ public:
     }
 };
 
-void tune(Instrument& i) {
+void tune(Instrument &i) {
     // ...
     i.play(middleC);
 }
 
 int main() {
-   Wind flute;
+    Wind flute;
 
-   tune(flute); // Upcasting
+    tune(flute); // Upcasting
 } ///:~

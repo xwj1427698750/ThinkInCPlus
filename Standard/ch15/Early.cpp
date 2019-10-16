@@ -3,6 +3,7 @@
 // Created by XPL on 2019/10/10.
 #include <iostream>
 #include <string>
+
 using namespace std;
 
 class Pet {
@@ -16,15 +17,15 @@ public:
 };
 
 int main() {
-   Dog ralph;
-   Pet* p1 = &ralph;
-   Pet& p2 = ralph;
-   Pet p3;
-   
-   // Late binding for both:
-   cout << "p1->speak() = " << p1->speak() << endl;
-   cout << "p2.speak() = " << p2.speak() << endl;
-   
-   // Early binding (probably)
-   cout << "p3.speak() = " << p3.speak() << endl;
+    Dog ralph;
+    Pet *p1 = &ralph;
+    Pet &p2 = ralph;
+    Pet p3;
+
+    // Late binding for both:
+    cout << "p1->speak() = " << p1->speak() << endl;
+    cout << "p2.speak() = " << p2.speak() << endl;
+
+    // Early binding (probably)
+    cout << "p3.speak() = " << p3.speak() << endl;
 } ///:~

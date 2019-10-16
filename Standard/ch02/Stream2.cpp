@@ -2,6 +2,7 @@
 // More Stream features
 // Created by XPL on 2019/9/30.
 #include <iostream>
+
 using namespace std;
 
 int main() {
@@ -10,7 +11,7 @@ int main() {
          << dec << 15 << endl;
     cout << "in octal: " << oct << 15 << endl;
     cout << "in hex: " << hex << 15 << endl;
-    cout << "a floating-point number: " 
+    cout << "a floating-point number: "
          << 3.14159 << endl;
     cout << "non-pointing char (escape): "
          << char(27) << endl;
