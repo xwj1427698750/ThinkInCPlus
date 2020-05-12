@@ -6,6 +6,7 @@ ADVANCE_DIR := ./Advance
 
 # File to be compiled
 SRC := $(wildcard $(STANDARD_DIR)/ch01/*.cpp $(STANDARD_DIR)/ch02/*.cpp)
+SRC += $(wildcard $(STANDARD_DIR)/test/*.cpp)
 OBJ := $(patsubst %.cpp, $(OBJ_DIR)/%.o, $(notdir $(SRC)))
 INC := $(patsubst %, -I%, $(shell find . -name '[a-zA-Z0-9]*'.h))
 EXE := $(OBJ:$(OBJ_DIR)/%.o=$(BIN_DIR)/%) 
@@ -26,6 +27,11 @@ $(OBJ_DIR)/%.o: $(STANDARD_DIR)/ch01/%.cpp
 	@$(CC) $(CFLAGS) -c -o $@ $<
 
 $(OBJ_DIR)/%.o: $(STANDARD_DIR)/ch02/%.cpp
+	@echo + CC $<
+	@mkdir -p $(OBJ_DIR)
+	@$(CC) $(CFLAGS) -c -o $@ $<
+
+$(OBJ_DIR)/%.o: $(STANDARD_DIR)/test/%.cpp
 	@echo + CC $<
 	@mkdir -p $(OBJ_DIR)
 	@$(CC) $(CFLAGS) -c -o $@ $<

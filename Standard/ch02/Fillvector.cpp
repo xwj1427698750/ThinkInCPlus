@@ -10,7 +10,7 @@ using namespace std;
 
 int main() {
     vector<string> v;
-    ifstream in("../Standard/ch02/Fillvector.cpp");
+    ifstream in("./Standard/ch02/Fillvector.cpp");
     string line;
 
     while (getline(in, line)) {
@@ -18,6 +18,6 @@ int main() {
     }
 
     // Add line numbers:
-    for (int i = 0; i < v.size(); i++)
+    for (size_t i = 0; i < v.size(); i++)
         cout << i << ": " << v[i] << endl;
 } ///:~
