@@ -1,47 +1,37 @@
-# File path
-BIN_DIR := ./bin
-OBJ_DIR := ./bin/obj
-STANDARD_DIR := ./Standard
-ADVANCE_DIR := ./Advance
+BIN_DIR := bin
+OBJ_DIR := $(BIN_DIR)/obj
+LIB_DIR := libs
 
-# File to be compiled
-SRC := $(wildcard $(STANDARD_DIR)/ch01/*.cpp $(STANDARD_DIR)/ch02/*.cpp)
-SRC += $(wildcard $(STANDARD_DIR)/test/*.cpp)
-OBJ := $(patsubst %.cpp, $(OBJ_DIR)/%.o, $(notdir $(SRC)))
-INC := $(patsubst %, -I%, $(shell find . -name '[a-zA-Z0-9]*'.h))
-EXE := $(OBJ:$(OBJ_DIR)/%.o=$(BIN_DIR)/%) 
+SRC_EXE_S_01 := HelloWorld.cpp
+SRC_EXE_S_02 := CallHello.cpp Concat.cpp
+SRC_EXE := $(patsubst %, Standard/ch01/%, $(SRC_EXE_S_01))
+SRC_EXE += $(patsubst %, Standard/ch02/%, $(SRC_EXE_S_02))
+
+OBJ_EXE := $(patsubst %.cpp, $(OBJ_DIR)/%.o, $(notdir $(SRC_EXE)))
+
+EXE := $(OBJ_EXE:$(OBJ_DIR)/%.o=$(BIN_DIR)/%)
+
+INC_DIR := $(patsubst %, -I%, $(shell find Standard -type d))
 
 CC := g++
-LD := g++
-CFLAGS := -g -Wall
+CFLAGS := -g -W -Wall $(INC_DIR)
 
-# Don't remove *.o files automatically
-.SECONDARY: $(OBJ)
+.SECONDARY: $(OBJ_EXE)
 
+.PHONY: all
 all: $(EXE)
 
-# Compile each *.c file as *.o files
-$(OBJ_DIR)/%.o: $(STANDARD_DIR)/ch01/%.cpp
-	@echo + CC $<
-	@mkdir -p $(OBJ_DIR)
-	@$(CC) $(CFLAGS) -c -o $@ $<
-
-$(OBJ_DIR)/%.o: $(STANDARD_DIR)/ch02/%.cpp
-	@echo + CC $<
-	@mkdir -p $(OBJ_DIR)
-	@$(CC) $(CFLAGS) -c -o $@ $<
-
-$(OBJ_DIR)/%.o: $(STANDARD_DIR)/test/%.cpp
-	@echo + CC $<
+$(OBJ_EXE): $(filter $(patsubst %.o, %, $(notdir $@)), $(SRC_EXE))
+	@echo + CC $@ $^
 	@mkdir -p $(OBJ_DIR)
 	@$(CC) $(CFLAGS) -c -o $@ $<
 
 $(BIN_DIR)/%: $(OBJ_DIR)/%.o
-	@echo + LD $@
+	@echo ++ LD $@
 	@mkdir -p $(BIN_DIR)
 	@$(CC) $(CFLAGS) -o $@ $<
 
-.PHONY: all clean
-
+.PHONY: clean
 clean:
 	rm -rf $(BIN_DIR)
+	rm -rf $(LIB_DIR)

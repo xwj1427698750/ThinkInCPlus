@@ -15,6 +15,7 @@ int main() {
 
     while (in >> word)  /* ">>/<<" use whitespace as separator */
         words.push_back(word);
-    for (int i = 0; i < words.size(); i++)
+    for (size_t i = 0; i < words.size(); i++)
         cout << words[i] << endl;
+    return 0;
 } ///:~
