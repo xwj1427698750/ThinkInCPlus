@@ -1,37 +1,24 @@
-BIN_DIR := bin
-OBJ_DIR := $(BIN_DIR)/obj
-LIB_DIR := libs
-
-SRC_EXE_S_01 := HelloWorld.cpp
-SRC_EXE_S_02 := CallHello.cpp Concat.cpp
-SRC_EXE := $(patsubst %, Standard/ch01/%, $(SRC_EXE_S_01))
-SRC_EXE += $(patsubst %, Standard/ch02/%, $(SRC_EXE_S_02))
-
-OBJ_EXE := $(patsubst %.cpp, $(OBJ_DIR)/%.o, $(notdir $(SRC_EXE)))
-
-EXE := $(OBJ_EXE:$(OBJ_DIR)/%.o=$(BIN_DIR)/%)
-
-INC_DIR := $(patsubst %, -I%, $(shell find Standard -type d))
-
 CC := g++
-CFLAGS := -g -W -Wall $(INC_DIR)
+CFLAGS := -Wall -g
 
-.SECONDARY: $(OBJ_EXE)
+ROOT_DIR := $(shell pwd)
+BUILD_DIR := $(ROOT_DIR)/build
+BIN_DIR := $(BUILD_DIR)/bin
+OBJ_DIR := $(BUILD_DIR)/obj
+LIB_DIR := $(BUILD_DIR)/lib
+DAT_DIR := $(BIN_DIR)/data
 
-.PHONY: all
-all: $(EXE)
+SUB_DIR := $(dir $(shell find . -maxdepth 2 -name "Makefile" | grep -v "\./Makefile" | sort))
 
-$(OBJ_EXE): $(filter $(patsubst %.o, %, $(notdir $@)), $(SRC_EXE))
-	@echo + CC $@ $^
-	@mkdir -p $(OBJ_DIR)
-	@$(CC) $(CFLAGS) -c -o $@ $<
+export CC CFLAGS ROOT_DIR BIN_DIR OBJ_DIR LIB_DIR DAT_DIR
 
-$(BIN_DIR)/%: $(OBJ_DIR)/%.o
-	@echo ++ LD $@
-	@mkdir -p $(BIN_DIR)
-	@$(CC) $(CFLAGS) -o $@ $<
+.PHONY: all clean
+all: $(SUB_DIR)
 
-.PHONY: clean
+$(SUB_DIR): force
+	@make -C $@
+
+force:;
+
 clean:
 	rm -rf $(BIN_DIR)
-	rm -rf $(LIB_DIR)
