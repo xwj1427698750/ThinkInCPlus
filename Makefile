@@ -6,7 +6,7 @@ BUILD_DIR := $(ROOT_DIR)/build
 BIN_DIR := $(BUILD_DIR)/bin
 OBJ_DIR := $(BUILD_DIR)/obj
 LIB_DIR := $(BUILD_DIR)/lib
-DAT_DIR := $(BIN_DIR)/data
+DAT_DIR := $(BUILD_DIR)/data
 
 SUB_DIR := $(dir $(shell find . -maxdepth 2 -name "Makefile" | grep -v "\./Makefile" | sort))
 
@@ -21,4 +21,4 @@ $(SUB_DIR): force
 force:;
 
 clean:
-	rm -rf $(BIN_DIR)
+	rm -rf $(BUILD_DIR)
