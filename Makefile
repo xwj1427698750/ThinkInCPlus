@@ -1,5 +1,5 @@
 CC := g++
-CFLAGS := -Wall -g
+CFLAGS := -Wall -g -std=c++11
 
 ROOT_DIR := $(shell pwd)
 BUILD_DIR := $(ROOT_DIR)/build
