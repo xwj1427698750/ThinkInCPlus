@@ -2,7 +2,7 @@
 
 objs := $(BIN_DIR)/EpollEtLtDemo $(BIN_DIR)/SelectDemo \
 		$(BIN_DIR)/TestAccept $(BIN_DIR)/TestOobSend $(BIN_DIR)/TestOobRecv \
-		$(BIN_DIR)/DupCGI
+		$(BIN_DIR)/DupCGI $(BIN_DIR)/ReadvWritev
 
 all: $(objs)
 
