@@ -26,17 +26,7 @@ int main(int argc, char *argv[])
 
 	int sockfd = socket(PF_INET, SOCK_STREAM, 0);
 	assert(sockfd >= 0);
-
-	int ret = bind(sockfd, (struct sockaddr *)&server_addr, sizeof(server_addr));
-	assert(ret != -1);
-
-	ret = listen(sockfd, 5);
-	assert(ret != -1);
-
-	struct sockaddr_in client_addr;
-	socklen_t client_addrlength = sizeof(client_addr);
-	int connfd = accept(sockfd, (struct sockaddr *)&client_addr, &client_addrlength);
-	if (connfd < 0)
+	if (connect(sockfd, (struct sockaddr *)&server_addr, sizeof(server_addr)) < 0)
 	{
 		printf("errno is %d\n", errno);
 	}
@@ -44,10 +34,9 @@ int main(int argc, char *argv[])
 	{
 		const char *oob_data = "abc";
 		const char *normal_data = "123";
-		send(connfd, normal_data, strlen(normal_data), 0);
-		send(connfd, oob_data, strlen(oob_data), MSG_OOB);
-		send(connfd, normal_data, strlen(normal_data), 0);
-		close(connfd);
+		send(sockfd, normal_data, strlen(normal_data), 0);
+		send(sockfd, oob_data, strlen(oob_data), MSG_OOB);
+		send(sockfd, normal_data, strlen(normal_data), 0);
 	}
 	close(sockfd);
 	return 0;
