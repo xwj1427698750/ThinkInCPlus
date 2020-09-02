@@ -1,14 +1,11 @@
 .PHONY: all
 
-objs := $(BIN_DIR)/EpollEtLtDemo $(BIN_DIR)/SelectDemo
+objs := $(BIN_DIR)/EpollEtLtDemo $(BIN_DIR)/SelectDemo \
+		$(BIN_DIR)/TestAccept
 
 all: $(objs)
 
-$(BIN_DIR)/EpollEtLtDemo : EpollEtLtDemo.cpp
-	@echo LD ++ $@
-	@$(CC) $(CFLAGS) $(C11) -o $@ $^
-
-$(BIN_DIR)/SelectDemo : SelectDemo.cpp
+$(BIN_DIR)/% : %.cpp
 	@echo LD ++ $@
 	@$(CC) $(CFLAGS) $(C11) -o $@ $^
 
