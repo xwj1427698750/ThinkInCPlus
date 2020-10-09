@@ -1,5 +1,7 @@
 CC := g++
-CFLAGS := -Wall -g -std=c++11
+CFLAGS := -Wall -g
+C11 := --std=c++11
+$(GCC)
 
 ROOT_DIR := $(shell pwd)
 BUILD_DIR := $(ROOT_DIR)/build
@@ -10,7 +12,7 @@ DAT_DIR := $(BUILD_DIR)/data
 
 SUB_DIR := $(dir $(shell find . -maxdepth 2 -name "Makefile" | grep -v "\./Makefile" | sort))
 
-export CC CFLAGS ROOT_DIR BIN_DIR OBJ_DIR LIB_DIR DAT_DIR
+export GCC CC CFLAGS C11 ROOT_DIR BIN_DIR OBJ_DIR LIB_DIR DAT_DIR
 
 .PHONY: all clean
 all: $(SUB_DIR)
