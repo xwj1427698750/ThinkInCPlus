@@ -1,10 +1,12 @@
 .PHONY: all
 
-objs := $(BIN_DIR)/HelloWorld
+obj := HelloWorld
 
-all: $(objs)
+binarys := $(foreach n, $(obj), $(BIN_DIR)/$(n))
 
-$(BIN_DIR)/% : %.cpp
+all : $(binarys)
+
+$(binarys) : $(BIN_DIR)/% : %.cpp
 	@mkdir -p $(@D)
-	@echo LD ++ $@
-	@$(CC) $(CFLAGS) -o $@ $^
+	@echo ++ LD $@
+	@$(CC) $(CFLAGS) -o $@ $<
