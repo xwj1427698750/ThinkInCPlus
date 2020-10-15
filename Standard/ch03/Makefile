@@ -7,11 +7,15 @@ objs := Return Ifthen Guess Guess2 Charlist Menu \
 		Scope OnTheFly Static Mathops Boolean CommaOperator SimpleCast \
 		FunctionCallCast StaticCast ConstCast ReinterpretCast \
 		Sizeof SizeofOperator SimpleStruct SimpleStruct2 SelfReferential \
-		SimpleStruct3 Enum
+		SimpleStruct3 Enum Union Array StructArray ArrayAddresses \
+		ArrayIdentifier PointersAndBrackets ArrayArguments \
+		PointerIncrement PointerIncrement2 PointerArithmetic \
+		DynamicDebugFlags StringizingExpressions Assert
 
 binarys := $(foreach n, $(objs), $(BIN_DIR)/$(n))
 
-lbin := $(BIN_DIR)/Global $(BIN_DIR)/FileStatic $(BIN_DIR)/Bitwise
+lbin := $(BIN_DIR)/Global $(BIN_DIR)/FileStatic $(BIN_DIR)/Bitwise \
+		$(BIN_DIR)/FloatingAsBinary
 
 all : $(binarys) $(lbin)
 
@@ -29,5 +33,9 @@ $(BIN_DIR)/FileStatic : FileStatic.cpp FileStatic2.cpp
 	@# @$(CC) $(CFLAGS) -o $@ $^
 
 $(BIN_DIR)/Bitwise : Bitwise.cpp PrintBinary.cpp PrintBinary.h
+	@echo LD ++ $@
+	@$(CC) $(CFLAGS) -o $@ $^
+
+$(BIN_DIR)/FloatingAsBinary : FloatingAsBinary.cpp PrintBinary.cpp PrintBinary.h
 	@echo LD ++ $@
 	@$(CC) $(CFLAGS) -o $@ $^
