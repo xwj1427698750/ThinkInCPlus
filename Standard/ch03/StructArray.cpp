@@ -8,7 +8,7 @@ typedef struct
 
 int main()
 {
-	ThreeDpoint p[10];
+	__attribute__((unused))ThreeDpoint p[10];
 	for (int i = 0; i < 10; i++)
 	{
 		p[i].i = i + 1;

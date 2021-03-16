@@ -1,1 +1,4 @@
 [Bb]in/
+*.cmake
+CMakeFiles
+CMakeCache.txt
