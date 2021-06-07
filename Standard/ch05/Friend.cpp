@@ -6,7 +6,7 @@
 struct X;
 
 struct Y {
-    void f(X*);
+    void f(X*);//这里不可以改为void f(X c);
 };
 
 struct X { // Definition
